@@ -6,7 +6,13 @@ public class Book {
     private int pgNum;
 
     //constructor
-    public Book(String author, String editor, String title, int pgNum) {
+    public Book(String author, String editor, String title, int pgNum) throws IllegalArgumentException {
+        if(isStringEmpty(title) || isStringEmpty(author) || isStringEmpty(editor)){
+            throw new IllegalArgumentException("All fields must be filled");
+        }
+        if (pgNum <= 0){
+            throw new IllegalArgumentException("Page Num must be an int bigger than 0");
+        }
         this.author = author;
         this.editor = editor;
         this.title = title;
@@ -18,7 +24,11 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        if (!isStringEmpty(author)) {
+            this.author = author;
+        }else{
+            throw new IllegalArgumentException("The 'Author' field must be filled");
+        }
     }
 
     public String getEditor() {
@@ -26,7 +36,11 @@ public class Book {
     }
 
     public void setEditor(String editor) {
-        this.editor = editor;
+        if (!isStringEmpty(editor)) {
+            this.editor = editor;
+        }else{
+            throw new IllegalArgumentException("The 'Editor' field must be filled");
+        }
     }
 
     public String getTitle() {
@@ -34,7 +48,11 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        if (!isStringEmpty(title)) {
+            this.title = title;
+        }else{
+            throw new IllegalArgumentException("The 'Title' field must be filled");
+        }
     }
 
     public int getPgNum() {
@@ -42,6 +60,30 @@ public class Book {
     }
 
     public void setPgNum(int pgNum) {
-        this.pgNum = pgNum;
+        if (!(pgNum <= 0)) {
+            this.pgNum = pgNum;
+        }else{
+            throw new IllegalArgumentException("Page Num must be an int bigger than 0");
+        }
+    }
+
+    //methods
+    private boolean isStringEmpty(String stringToCheck){
+
+        if (stringToCheck.isBlank() || stringToCheck == null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //override
+
+    @Override
+    public String toString() {
+        return
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", editor='" + editor + '\'' +
+                ", pgNum=" + pgNum;
     }
 }
