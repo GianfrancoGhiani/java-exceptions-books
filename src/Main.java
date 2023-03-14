@@ -42,8 +42,12 @@ public class Main {
         }
 
         // creation of the array
-        System.out.println("How many books do you want to insert to your shelf?");
-        String n = userInput.nextLine();
+        String n;
+        do {
+            System.out.println("How many books do you want to insert to your shelf?");
+            n = userInput.nextLine();
+        }while (!isInt(n));
+
         int bookNum = 0;
         if (isInt(n)){
             bookNum = Integer.parseInt(n);
